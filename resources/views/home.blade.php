@@ -4,10 +4,10 @@
 
 @section('content')
     <!--
-                                                                                  Hero Section
-                                                                                  - Full-width image with overlay for text readability
-                                                                                  - Strong H1 and compelling CTA
-                                                                                -->
+                                                                                          Hero Section
+                                                                                          - Full-width image with overlay for text readability
+                                                                                          - Strong H1 and compelling CTA
+                                                                                        -->
     <section class="relative h-[80vh] min-h-[500px] bg-cover bg-center"
         style="
           background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
@@ -28,10 +28,10 @@
     </section>
 
     <!--
-                                                                                  Category Navigation
-                                                                                  - Visual separation for Men's and Women's sections
-                                                                                  - High-quality images to draw users in
-                                                                                -->
+                                                                                          Category Navigation
+                                                                                          - Visual separation for Men's and Women's sections
+                                                                                          - High-quality images to draw users in
+                                                                                        -->
     <section class="py-16 md:py-24">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -68,10 +68,10 @@
     </section>
 
     <!--
-                                                                                  Featured Products
-                                                                                  - Clean grid layout for product cards
-                                                                                  - Interactive hover effects with "Quick View"
-                                                                                -->
+                                                                                          Featured Products
+                                                                                          - Clean grid layout for product cards
+                                                                                          - Interactive hover effects with "Quick View"
+                                                                                        -->
     <section class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center font-heading mb-12">
@@ -167,10 +167,10 @@
     </section>
 
     <!--
-                                                                                  The "Looks" Difference - Trust Building
-                                                                                  - Split layout for visual interest
-                                                                                  - Clear icons and messaging about brand values
-                                                                                -->
+                                                                                          The "Looks" Difference - Trust Building
+                                                                                          - Split layout for visual interest
+                                                                                          - Clear icons and messaging about brand values
+                                                                                        -->
     <section class="py-16 md:py-24">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center gap-12">
@@ -182,9 +182,9 @@
                     <h2 class="text-3xl font-bold font-heading">
                         Curated Styles, Guaranteed Authenticity
                     </h2>
-                    <p class="mt-4 text-gray-600">
+                    <p class="mt-4 text-gray-600 text-justify">
                         At Looks, we believe true style is a statement of authenticity. We meticulously curate our
-                        collection—featuring apparel, footwear, jackets, and trousers—from both renowned international
+                        collection featuring apparel, footwear, jackets, and trousers from both renowned international
                         designers and Indonesia's most talented local artisans. Every item in our selection is a testament
                         to superior quality and is guaranteed 100% authentic.
                     </p>
@@ -216,9 +216,9 @@
     </section>
 
     <!--
-                                                                                  Social Proof - Customer Reviews
-                                                                                  - Builds credibility with user-generated content
-                                                                                -->
+                                                                                          Social Proof - Customer Reviews
+                                                                                          - Builds credibility with user-generated content
+                                                                                        -->
     <section class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center font-heading mb-12">
@@ -254,10 +254,10 @@
     </section>
 
     <!--
-                                                                                  Newsletter CTA
-                                                                                  - High-contrast section to grab attention
-                                                                                  - Clear value proposition (discount) to drive sign-ups
-                                                                                -->
+                                                                                          Newsletter CTA
+                                                                                          - High-contrast section to grab attention
+                                                                                          - Clear value proposition (discount) to drive sign-ups
+                                                                                        -->
     <section class="py-20 bg-gray-800 text-white">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold font-heading">
