@@ -35,12 +35,23 @@
                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </a>
-                <a href="#" class="text-gray-700 hover:text-accent">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                </a>
+                @auth
+                    <!-- Jika sudah login, link ke profil -->
+                    <a href="#" class="text-gray-700 hover:text-accent">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </a>
+                    @elseguest
+                    <!-- Jika belum, link ke register -->
+                    <a href="{{ route('register') }}" class="text-gray-700 hover:text-accent">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </a>
+                @endauth
                 <a href="#" class="text-gray-700 hover:text-accent relative">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -49,6 +60,20 @@
                     <span
                         class="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
                 </a>
+                @auth
+                    <!-- Logout Button -->
+                    <form method="POST" action="{{ route('logout') }}" class="inline-block">
+                        @csrf
+                        <button type="submit" class="text-gray-700 hover:text-accent flex items-center focus:outline-none"
+                            title="Logout">
+                            <svg class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 11-4 0v-1m0-8V7a2 2 0 114 0v1" />
+                            </svg>
+                            {{-- <span class="hidden sm:inline-block text-sm">Logout</span> --}}
+                        </button>
+                    </form>
+                @endauth
             </div>
         </div>
 
@@ -58,6 +83,14 @@
             <a href="#" class="block text-gray-700 hover:text-accent">Women</a>
             <a href="#" class="block text-gray-700 hover:text-accent">New Arrivals</a>
             <a href="#" class="block text-red-500 hover:text-red-700">Sale</a>
+            @auth
+                <form method="POST" action="{{ route('logout') }}" class="mt-2">
+                    @csrf
+                    <button type="submit" class="w-full text-left text-gray-700 hover:text-accent font-semibold">
+                        Logout
+                    </button>
+                </form>
+            @endauth
         </div>
     </nav>
 </header>

@@ -21,7 +21,8 @@
 
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div class="bg-white py-8 px-4 shadow-sm sm:rounded-lg sm:px-10 border border-gray-200">
-                <form class="space-y-6" action="{{ route('login') }}" method="POST" x-data="{ loading: false }">
+                <form class="space-y-6" action="{{ route('login') }}" method="POST" x-data="{ loading: false }"
+                    @submit="loading = true" aria-busy="true">
                     @csrf
 
                     <!-- Email Field -->
@@ -99,7 +100,7 @@
 
                     <!-- Submit Button -->
                     <div>
-                        <button type="submit" @click="loading = true" :disabled="loading"
+                        <button type="submit" :disabled="loading"
                             class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
                             <span x-show="!loading">Sign in</span>
                             <span x-show="loading" class="flex items-center">
