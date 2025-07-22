@@ -6,14 +6,14 @@
     <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
             <div class="flex justify-center">
-                <h1 class="text-3xl font-bold text-gray-900">Looks</h1>
+                <h1 class="text-3xl font-bold text-gray-900 font-heading">Looks</h1>
             </div>
-            <h2 class="mt-6 text-center text-3xl font-light text-gray-900">
+            <h2 class="mt-6 text-center text-3xl font-bold text-gray-900 font-heading">
                 Welcome back
             </h2>
             <p class="mt-2 text-center text-sm text-gray-600">
                 Don't have an account?
-                <a href="{{ route('register') }}" class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors">
+                <a href="{{ route('register') }}" class="font-medium text-accent hover:text-accent-dark transition-colors">
                     Sign up here
                 </a>
             </p>
@@ -33,7 +33,7 @@
                         <div class="relative">
                             <input id="email" name="email" type="email" autocomplete="email" required
                                 value="{{ old('email') }}"
-                                class="appearance-none block w-full px-3 py-3 border rounded-md placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors {{ $errors->has('email') ? 'border-red-500' : 'border-gray-300' }}"
+                                class="appearance-none block w-full px-3 py-3 border rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#556b2f] focus:border-[#556b2f] sm:text-sm transition-colors {{ $errors->has('email') ? 'border-red-500' : 'border-gray-300' }}"
                                 placeholder="Enter your email">
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                                 <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -55,7 +55,7 @@
                         <div class="relative" x-data="{ showPassword: false }">
                             <input :type="showPassword ? 'text' : 'password'" id="password" name="password"
                                 autocomplete="current-password" required
-                                class="appearance-none block w-full px-3 py-3 border rounded-md placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors @error('password') border-red-500 @enderror"
+                                class="appearance-none block w-full px-3 py-3 border rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#556b2f] focus:border-[#556b2f] sm:text-sm transition-colors {{ $errors->has('password') ? 'border-red-500' : 'border-gray-300' }}"
                                 placeholder="Enter your password">
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                                 <button type="button" @click="showPassword = !showPassword"
@@ -84,7 +84,7 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
                             <input id="remember_me" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}
-                                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+                                class="h-4 w-4 text-accent focus:ring-[#556b2f] border-gray-300 rounded">
                             <label for="remember_me" class="ml-2 block text-sm text-gray-900">
                                 Remember me
                             </label>
@@ -92,7 +92,7 @@
 
                         <div class="text-sm">
                             <a href="{{ route('password.request') }}"
-                                class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors">
+                                class="font-medium text-accent hover:text-accent-dark transition-colors">
                                 Forgot password?
                             </a>
                         </div>
@@ -101,7 +101,7 @@
                     <!-- Submit Button -->
                     <div>
                         <button type="submit" :disabled="loading"
-                            class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                            class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-accent hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#556b2f] disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
                             <span x-show="!loading">Sign in</span>
                             <span x-show="loading" class="flex items-center">
                                 <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
@@ -128,7 +128,7 @@
                         </div>
                     </div>
 
-                    <!-- Social Login (Optional) -->
+                    <!-- Social Login -->
                     <div class="mt-6 grid grid-cols-2 gap-3">
                         <button type="button"
                             class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-500 bg-white hover:bg-gray-50 transition-colors">
