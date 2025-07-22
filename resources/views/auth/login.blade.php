@@ -83,7 +83,7 @@
                     <!-- Remember Me & Forgot Password -->
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
-                            <input id="remember_me" name="remember" type="checkbox"
+                            <input id="remember_me" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}
                                 class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
                             <label for="remember_me" class="ml-2 block text-sm text-gray-900">
                                 Remember me
@@ -163,7 +163,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-@endpush
