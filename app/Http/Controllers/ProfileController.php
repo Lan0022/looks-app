@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -55,6 +54,7 @@ class ProfileController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->address = $request->address;
+        /** @var \App\Models\User $user **/
         $user->save();
 
         return redirect()->route('profile.update')->with('success', 'Profile updated successfully.');
@@ -72,6 +72,7 @@ class ProfileController extends Controller
         if ($user->avatar) {
             Storage::disk('public')->delete($user->avatar);
             $user->avatar = null;
+            /** @var \App\Models\User $user **/
             $user->save();
         }
 
@@ -98,6 +99,7 @@ class ProfileController extends Controller
         }
 
         $user->password = Hash::make($request->password);
+        /** @var \App\Models\User $user **/
         $user->save();
 
         return redirect()->route('profile')->with('success', 'Password updated successfully.');
