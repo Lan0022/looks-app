@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
@@ -15,6 +16,40 @@ class AuthController extends Controller
 {
     use ApiResponse;
 
+    // public function register(RegisterRequest $request)
+    // {
+    //     $user = User::create([
+    //         'name' => $request->name,
+    //         'email' => $request->email,
+    //         'password' => Hash::make($request->password),
+    //         'phone' => $request->phone,
+    //         'address' => $request->address,
+    //         'is_admin' => false, // Default false sesuai database
+    //     ]);
+
+    //     $token = $user->createToken('auth_token')->plainTextToken;
+
+    //     return $this->successResponse([
+    //         'user' => $user,
+    //         'token' => $token,
+    //     ], 'Registration successful', 201);
+    // }
+
+    // public function login(LoginRequest $request)
+    // {
+    //     if (!Auth::attempt($request->only('email', 'password'))) {
+    //         return $this->errorResponse('Invalid credentials', 401);
+    //     }
+
+    //     $user = Auth::user();
+    //     $token = $user->createToken('auth_token')->plainTextToken;
+
+    //     return $this->successResponse([
+    //         'user' => $user,
+    //         'token' => $token,
+    //     ], 'Login successful');
+    // }
+
     public function register(RegisterRequest $request)
     {
         $user = User::create([
@@ -22,16 +57,14 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
-            'address' => $request->address,
-            'is_admin' => false, // Default false sesuai database
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return $this->successResponse([
-            'user' => $user,
-            'token' => $token,
-        ], 'Registration successful', 201);
+            'user' => new UserResource($user),
+            'token' => $token
+        ], 'Registration successful');
     }
 
     public function login(LoginRequest $request)
@@ -44,8 +77,8 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return $this->successResponse([
-            'user' => $user,
-            'token' => $token,
+            'user' => new UserResource($user),
+            'token' => $token
         ], 'Login successful');
     }
 
