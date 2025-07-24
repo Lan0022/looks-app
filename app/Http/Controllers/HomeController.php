@@ -7,6 +7,11 @@ use App\Models\Product;
 
 class HomeController extends Controller
 {
+    /**
+     * Display the home page with featured products and testimonials.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         // // Ambil produk trending/featured
