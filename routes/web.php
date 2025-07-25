@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductController;
+use App\Models\Product;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -24,6 +26,8 @@ Route::middleware('guest')->group(function () {
     // Forgot password routes
     Route::get('/forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
     Route::post('/forgot-password', [AuthController::class, 'sendPasswordResetLink'])->name('password.email');
+
+    Route::get('/products', [ProductController::class, 'showProducts'])->name('products');
 });
 
 // Authenticated routes
