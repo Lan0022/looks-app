@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 // });
 //Home route
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
 // Guest routes (only accessible when not authenticated)
 Route::middleware('guest')->group(function () {
     // Login routes
@@ -28,6 +29,7 @@ Route::middleware('guest')->group(function () {
 // Authenticated routes
 Route::middleware('auth')->group(function () {
 
+    // Profile routes
     Route::get('/profile', [ProfileController::class, 'showUserProfile'])->name('profile');
     Route::put('/profile', [ProfileController::class, 'updateUserProfile'])->name('profile.update');
     Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar'])->name('profile.delete-avatar');
