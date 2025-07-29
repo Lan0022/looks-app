@@ -5,7 +5,7 @@
 @section('content')
 
     <div>
-        <!-- No surplus words or unnecessary actions. - Marcus Aurelius -->
+
         @props(['products', 'categories'])
 
         <section class="bg-gray-50 font-sans" x-data="productBrowser({
@@ -93,9 +93,10 @@
                         <a :href="`/products/${product.slug}`" class="group">
                             <div
                                 class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col h-full">
-                                <!-- Product Image -->
-                                <div class="relative w-full aspect-w-1 aspect-h-1 bg-gray-200 overflow-hidden">
-                                    <img :src="product.primary_image" :alt="`[Gambar ${product.name}]`"
+                                <!-- Product Image Container -->
+                                <!-- PERUBAHAN DI SINI: Menggunakan `aspect-square` untuk rasio 1:1 -->
+                                <div class="relative w-full aspect-square bg-gray-200 overflow-hidden">
+                                    <img :src="'/storage/' + product.primary_image" :alt="`[Gambar ${product.name}]`"
                                         class="w-full h-full object-center object-cover group-hover:opacity-75 transition-opacity duration-300">
                                     <!-- Discount Badge -->
                                     <template x-if="product.discount_price">
@@ -113,20 +114,29 @@
                                         x-text="product.name"></h3>
 
                                     <!-- Rating -->
-                                    <div class="mt-2 flex items-center" x-show="product.rating > 0">
-                                        <div class="flex items-center">
-                                            <template x-for="i in 5">
-                                                <svg class="h-5 w-5 flex-shrink-0"
-                                                    :class="product.rating >= i ? 'text-yellow-400' : 'text-gray-300'"
-                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                    fill="currentColor">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                </svg>
-                                            </template>
-                                        </div>
-                                        <p class="ml-2 text-sm text-gray-500" x-text="`${product.total_reviews} ulasan`">
-                                        </p>
+                                    <div class="mt-2 flex items-center h-5"> <!-- Fixed height to prevent layout shift -->
+                                        <!-- Show stars if there are reviews -->
+                                        <template x-if="product.total_reviews > 0">
+                                            <div class="flex items-center">
+                                                <div class="flex items-center">
+                                                    <template x-for="i in 5">
+                                                        <svg class="h-5 w-5 flex-shrink-0"
+                                                            :class="product.rating >= i ? 'text-yellow-400' : 'text-gray-300'"
+                                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                            fill="currentColor">
+                                                            <path
+                                                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                        </svg>
+                                                    </template>
+                                                </div>
+                                                <p class="ml-2 text-sm text-gray-500"
+                                                    x-text="`${product.total_reviews} ulasan`"></p>
+                                            </div>
+                                        </template>
+                                        <!-- Show message if there are no reviews -->
+                                        <template x-if="!product.total_reviews || product.total_reviews == 0">
+                                            <p class="text-sm text-gray-400 italic">Belum ada ulasan</p>
+                                        </template>
                                     </div>
 
                                     <!-- Price -->
