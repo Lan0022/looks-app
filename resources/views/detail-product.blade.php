@@ -126,7 +126,7 @@
                         </div>
 
                         {{-- Form untuk Add to Cart --}}
-                        <form class="mt-6" action="{{-- route('cart.add') --}}" method="POST">
+                        <form class="mt-6" action="{{ route('cart.add') }}" method="POST">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
 

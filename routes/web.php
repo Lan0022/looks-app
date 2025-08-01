@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -40,6 +41,12 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', [ProfileController::class, 'updateUserProfile'])->name('profile.update');
     Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar'])->name('profile.delete-avatar');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
+
+    // Cart routes
+    Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/remove/{cart}', [CartController::class, 'destroy'])->name('cart.remove');
 
     // Logout route
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
