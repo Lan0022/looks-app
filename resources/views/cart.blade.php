@@ -138,11 +138,14 @@
                                 <dd class="text-base font-medium text-gray-900" x-text="formatCurrency(total)"></dd>
                             </div>
                         </dl>
-                        <div class="mt-6">
-                            <button type="submit"
-                                class="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500">Lanjut
-                                ke Checkout</button>
-                        </div>
+                        <form action="{{ route('order') }}" method="GET">
+                            @csrf
+                            <div class="mt-6">
+                                <button type="submit"
+                                    class="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500">Lanjut
+                                    ke Checkout</button>
+                            </div>
+                        </form>
                     </section>
                 </div>
             </template>
@@ -374,7 +377,7 @@
                 },
 
                 get tax() {
-                    return this.subtotal * this.taxRate;
+                    return (this.subtotal + this.shippingCost) * this.taxRate;
                 },
 
                 get total() {

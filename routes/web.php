@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -47,6 +48,22 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
     Route::patch('/cart/update/{cart}', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/remove/{cart}', [CartController::class, 'destroy'])->name('cart.remove');
+
+    // Order routes
+    Route::get('/checkout', [OrderController::class, 'showOrder'])->name('order');
+    Route::post('/checkout', [OrderController::class, 'storeOrder'])->name('order.store');
+
+    // Order history route
+    Route::get('/orders', [OrderController::class, 'showOrderHistory'])->name('order.history');
+    Route::get('/orders/{order}', [OrderController::class, 'showDetailOrderHistory'])->name('detail-order.history');
+
+    // // Order success route
+    // Route::get('/order/success/{orderNumber}', function ($orderNumber) {
+    //     $order = Order::where('order_number', $orderNumber)->where('user_id', Auth::id())->firstOrFail();
+    //     // Anda bisa membuat view khusus untuk halaman sukses ini
+    //     return "<h1>Pesanan Berhasil!</h1><p>Nomor pesanan Anda adalah: {$order->order_number}</p>";
+    // })->name('order.success');
+
 
     // Logout route
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
