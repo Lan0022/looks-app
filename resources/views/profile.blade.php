@@ -1,121 +1,119 @@
 @extends('layouts.app')
 
+@section('title', 'Profil Saya - LOOKS')
+
 @section('content')
-    <div class="min-h-screen bg-gray-50 py-8" x-data="profileData()">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Header -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-8">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-6">
-                        <div class="relative">
+
+    <div class="bg-gray-50 font-sans" x-data="profileData()">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+
+            <!-- Header Profil -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <!-- Info Pengguna -->
+                    <div class="flex items-center space-x-5">
+                        <div class="relative flex-shrink-0">
                             @if (Auth::user()->avatar)
                                 <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar"
-                                    class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-lg">
+                                    class="w-20 h-20 rounded-full object-cover border-4 border-white shadow-md">
                             @else
                                 <div
-                                    class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
-                                    <span class="text-white text-2xl font-bold">{{ substr($user->name, 0, 1) }}</span>
+                                    class="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-md">
+                                    <span class="text-white text-3xl font-bold">{{ substr($user->name, 0, 1) }}</span>
                                 </div>
                             @endif
                         </div>
                         <div>
-                            <h1 class="text-3xl font-bold text-gray-900">{{ $user->name }}</h1>
+                            <h1 class="text-2xl font-bold text-gray-900">{{ $user->name }}</h1>
                             <p class="text-gray-500 mt-1">{{ $user->email }}</p>
-                            <div class="flex items-center mt-2">
-                                <span
-                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                    {{ $user->is_admin ? 'Admin' : 'User' }}
-                                </span>
-                            </div>
                         </div>
                     </div>
-                    <button @click="editMode = true"
-                        class="px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-colors duration-200 flex items-center space-x-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                        </svg>
-                        <span>Edit Profile</span>
-                    </button>
+                    <!-- Tombol Aksi Utama -->
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <a href="{{ route('order.history') }}"
+                            class="w-full sm:w-auto flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200">
+                            <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                            </svg>
+                            <span>Riwayat Pesanan</span>
+                        </a>
+                        <button @click="editMode = true"
+                            class="w-full sm:w-auto flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors duration-200">
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                            <span>Edit Profil</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Profile Information -->
+            <!-- Konten Profil -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Personal Information -->
+                <!-- Kolom Kiri: Informasi Detail -->
                 <div class="lg:col-span-2">
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-6">Personal Information</h2>
-                        <div class="space-y-6">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                                <p class="text-gray-900 font-medium">{{ $user->name }}</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                                <p class="text-gray-900">{{ $user->email }}</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                                <p class="text-gray-900">{{ $user->phone ?: 'Not provided' }}</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
-                                <p class="text-gray-900">{{ $user->address ?: 'Not provided' }}</p>
-                            </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="p-6 border-b border-gray-200">
+                            <h2 class="text-lg font-semibold text-gray-900">Informasi Akun</h2>
                         </div>
+                        <dl class="divide-y divide-gray-200">
+                            <div class="px-6 py-5 grid grid-cols-1 sm:grid-cols-3 sm:gap-4">
+                                <dt class="text-sm font-medium text-gray-500">Nama Lengkap</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $user->name }}</dd>
+                            </div>
+                            <div class="px-6 py-5 grid grid-cols-1 sm:grid-cols-3 sm:gap-4">
+                                <dt class="text-sm font-medium text-gray-500">Alamat Email</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ $user->email }}</dd>
+                            </div>
+                            <div class="px-6 py-5 grid grid-cols-1 sm:grid-cols-3 sm:gap-4">
+                                <dt class="text-sm font-medium text-gray-500">Nomor Telepon</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    {{ $user->phone ?: 'Belum diisi' }}</dd>
+                            </div>
+                            <div class="px-6 py-5 grid grid-cols-1 sm:grid-cols-3 sm:gap-4">
+                                <dt class="text-sm font-medium text-gray-500">Alamat</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    {{ $user->address ?: 'Belum diisi' }}</dd>
+                            </div>
+                            <div class="px-6 py-5 grid grid-cols-1 sm:grid-cols-3 sm:gap-4">
+                                <dt class="text-sm font-medium text-gray-500">Bergabung Sejak</dt>
+                                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                    {{ $user->created_at->format('d F Y') }}</dd>
+                            </div>
+                        </dl>
                     </div>
                 </div>
 
-                <!-- Account Details -->
+                <!-- Kolom Kanan: Aksi & Keamanan -->
                 <div class="space-y-8">
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Account Details</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Member Since</label>
-                                <p class="text-gray-900">{{ $user->created_at->format('F j, Y') }}</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Last Updated</label>
-                                <p class="text-gray-900">{{ $user->updated_at->format('F j, Y') }}</p>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Email Verified</label>
-                                <span
-                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $user->email_verified_at ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                    {{ $user->email_verified_at ? 'Verified' : 'Not Verified' }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Quick Actions -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Keamanan</h3>
                         <div class="space-y-3">
                             <button @click="showPasswordModal = true"
-                                class="w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-50 rounded-lg transition-colors duration-200 flex items-center space-x-3">
+                                class="w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200 flex items-center space-x-3">
                                 <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                 </svg>
-                                <span>Change Password</span>
+                                <span>Ubah Password</span>
                             </button>
-                            @if (Auth::user()->avatar)
-                                <form action="{{ route('profile.delete-avatar') }}" method="POST" class="inline">
+                            <div class="border-t border-gray-200 !mt-4 pt-4">
+                                <form action="{{ route('logout') }}" method="POST" class="inline">
                                     @csrf
-                                    @method('DELETE')
                                     <button type="submit"
                                         class="w-full px-4 py-3 text-left text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200 flex items-center space-x-3">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                         </svg>
-                                        <span>Delete Avatar</span>
+                                        <span>Keluar</span>
                                     </button>
                                 </form>
-                            @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -260,8 +258,6 @@
             </div>
         </div>
     </div>
-
-
 
     <script>
         function profileData() {

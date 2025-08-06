@@ -11,10 +11,10 @@ use App\Http\Controllers\OrderController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
 //Home route
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/products', [ProductController::class, 'showProducts'])->name('products');
-Route::get('/products/{product}', [ProductController::class, 'showDetailProduct'])->name('product.show.detail');
+
 
 // Guest routes (only accessible when not authenticated)
 Route::middleware('guest')->group(function () {
@@ -31,7 +31,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/forgot-password', [AuthController::class, 'sendPasswordResetLink'])->name('password.email');
 
     // Product routes
-    // Route::get('/products', [ProductController::class, 'showProducts'])->name('products');
+    Route::get('/products', [ProductController::class, 'showProducts'])->name('products');
+    Route::get('/products/{product}', [ProductController::class, 'showDetailProduct'])->name('product.show.detail');
 });
 
 // Authenticated routes
@@ -57,19 +58,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders', [OrderController::class, 'showOrderHistory'])->name('order.history');
     Route::get('/orders/{order}', [OrderController::class, 'showDetailOrderHistory'])->name('detail-order.history');
 
-    // // Order success route
-    // Route::get('/order/success/{orderNumber}', function ($orderNumber) {
-    //     $order = Order::where('order_number', $orderNumber)->where('user_id', Auth::id())->firstOrFail();
-    //     // Anda bisa membuat view khusus untuk halaman sukses ini
-    //     return "<h1>Pesanan Berhasil!</h1><p>Nomor pesanan Anda adalah: {$order->order_number}</p>";
-    // })->name('order.success');
-
-
     // Logout route
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-    // Product routes
-    // Route::get('/products', [ProductController::class, 'showProducts'])->name('products');
 
     // Dashboard route (example)
     // Route::get('/dashboard', function () {
